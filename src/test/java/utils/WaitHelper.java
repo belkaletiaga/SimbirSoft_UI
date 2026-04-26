@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,5 +19,9 @@ public class WaitHelper {
 
     public static void waitForListVisible(WebDriverWait wait, List<WebElement> elements) {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
+    public static void waitForTextToBePresent(WebDriverWait wait, WebElement elements, String text) {
+        wait.until(ExpectedConditions.textToBePresentInElement(elements, text));
     }
 }

@@ -20,12 +20,6 @@ public class BasePage {
     public void scrollToElement(WebElement element)  {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element);
-
-        try {
-            Thread.sleep(400);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
         WaitHelper.waitForVisible(wait, element);;
     }
 }

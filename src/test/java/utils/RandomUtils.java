@@ -8,7 +8,6 @@ import java.util.Random;
 public class RandomUtils {
     private static final Random random = new Random();
 
-    // Выбор рандомного элемента в списке элементов
     public static WebElement selectRandomElement(List<WebElement> elements)  {
         WebElement randomElement = elements.get(random.nextInt(elements.size()));
         return randomElement;

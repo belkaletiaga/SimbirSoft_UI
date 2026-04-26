@@ -32,7 +32,7 @@
 
 ### Запустить конкретный класс
 ```bash
-./gradlew test --tests "tests.FilterTest"
+./gradlew test --tests "tests.SortTest"
 ./gradlew test --tests "tests.SearchTest"
 ./gradlew test --tests "tests.RandomAddToCartTest"
 ```
