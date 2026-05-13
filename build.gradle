@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id('io.qameta.allure') version "3.1.0"
+}
+
+group = 'com.SimbirSoft'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.aspectj:aspectjweaver:1.9.25.1'
+    implementation 'org.aspectj:aspectjrt:1.9.25.1'
+    // Selenium
+    implementation 'org.seleniumhq.selenium:selenium-java:4.41.0'
+    // Allure
+    testImplementation 'io.qameta.allure:allure-junit5:2.33.0'
+    implementation 'io.qameta.allure:allure-java-commons:2.33.0'
+    // Логгер
+    testImplementation 'org.slf4j:slf4j-simple:2.0.17'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Задача для параллельного запуска
+task testParallel(type: Test) {
+    useJUnitPlatform()
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
+    // Системные свойства для JUnit Platform (включают параллель)
+    systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
+    systemProperty 'junit.jupiter.execution.parallel.mode.default', 'concurrent'
+    systemProperty 'junit.jupiter.execution.parallel.config.strategy', 'dynamic'
+    testLogging {
+    events "passed", "skipped", "failed"
+    }
+}
